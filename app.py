@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from langchain_community.document_loaders import PyPDFLoader
 from fastapi.responses import JSONResponse
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import os
 import json
 import pandas as pd
@@ -14,10 +15,24 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-#KEY = os.getenv("OPENAI_API_KEY")
+KEY = os.getenv("OPENAI_API_KEY")
 KEY=" "
 # LangChain Model
 llm = ChatOpenAI(openai_api_key=KEY, model_name="gpt-3.5-turbo", temperature=0.5)
+# Model setup
+# MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"  # Replace with the desired LLaMA model name
+
+
+# # Load tokenizer and model
+# tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+# model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+
+# # Create a pipeline for conversational AI
+# llm = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)  # Use device=0 for GPU if available
+
+# # Load tokenizer and model
+# tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+# model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
 
 
